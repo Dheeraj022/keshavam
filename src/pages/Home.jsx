@@ -18,23 +18,36 @@ const Home = () => {
 
     const audio = window.globalThemeAudio
 
-    // Ensure it is paused and reset to 0:30 by default when entering page
+    // Ensure it is paused by default when entering page
     audio.pause()
-    audio.currentTime = 30
 
-    const handleLoadedMetadata = () => {
-      audio.currentTime = 30
+    const setInitialTime = () => {
+      try {
+        audio.currentTime = 30
+      } catch (e) {
+        console.warn("Failed to set initial time:", e)
+      }
     }
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+
+    // Set time immediately if metadata is already loaded, otherwise listen to event
+    if (audio.readyState >= 1) {
+      setInitialTime()
+    } else {
+      audio.addEventListener('loadedmetadata', setInitialTime)
+    }
 
     const handleGlobalClick = () => {
       // Play on first click anywhere if user hasn't explicitly paused it
       if (audio.paused && !userPausedRef.current) {
-        if (audio.currentTime < 30) {
-          audio.currentTime = 30
+        if (audio.readyState >= 1 && audio.currentTime < 30) {
+          setInitialTime()
         }
         audio.play()
           .then(() => {
+            // Re-assert start offset on play resolution (critical for mobile lazy loading)
+            if (audio.currentTime < 30) {
+              setInitialTime()
+            }
             setIsPlaying(true)
           })
           .catch(err => {
@@ -48,7 +61,7 @@ const Home = () => {
 
     return () => {
       document.removeEventListener('click', handleGlobalClick)
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      audio.removeEventListener('loadedmetadata', setInitialTime)
       // Note: We do not pause the audio here so it continues playing when shifting to other public pages like Login
     }
   }, [])
@@ -64,11 +77,14 @@ const Home = () => {
       setIsPlaying(false)
     } else {
       userPausedRef.current = false
-      if (audio.currentTime < 30) {
+      if (audio.readyState >= 1 && audio.currentTime < 30) {
         audio.currentTime = 30
       }
       audio.play()
         .then(() => {
+          if (audio.currentTime < 30) {
+            audio.currentTime = 30
+          }
           setIsPlaying(true)
         })
         .catch(err => {
