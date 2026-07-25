@@ -250,11 +250,20 @@ const Dashboard = () => {
       return
     }
 
-    // Auto-prepend role prefix for gate admins if it doesn't already start with it
-    if (profile?.role !== 'super_admin') {
-      const prefix = rolePrefix[profile?.role]
-      if (prefix && !rawCode.startsWith(prefix)) {
-        rawCode = prefix + rawCode
+    // Extract prefix and auto-pad numeric part to 3 digits (e.g., making "21" -> "021")
+    const validPrefixes = ['PLT', 'GLD', 'SLR', 'BRZ']
+    const hasPrefix = validPrefixes.some(p => rawCode.startsWith(p))
+
+    if (hasPrefix) {
+      const prefix = rawCode.substring(0, 3)
+      const numbers = rawCode.substring(3)
+      rawCode = prefix + numbers.padStart(3, '0')
+    } else {
+      if (profile?.role !== 'super_admin') {
+        const prefix = rolePrefix[profile?.role]
+        if (prefix) {
+          rawCode = prefix + rawCode.padStart(3, '0')
+        }
       }
     }
 
