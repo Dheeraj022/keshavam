@@ -48,8 +48,15 @@ const Sidebar = ({ isOpen, onClose }) => {
     },
   ]
 
-  // Filter links by current user's role
-  const activeLinks = links.filter((link) => link.roles.includes(profile?.role))
+  // Filter links by current user's role and dynamically rename 'Settings' for non-super_admins
+  const activeLinks = links
+    .filter((link) => link.roles.includes(profile?.role))
+    .map((link) => {
+      if (link.name === 'Settings' && profile?.role !== 'super_admin') {
+        return { ...link, name: 'Account Info' }
+      }
+      return link
+    })
 
   return (
     <>

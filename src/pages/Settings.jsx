@@ -29,10 +29,12 @@ const Settings = () => {
       {/* Page Header */}
       <div>
         <h2 className="text-xl lg:text-2xl font-serif font-bold text-white uppercase tracking-wider">
-          Profile & Settings
+          {profile?.role === 'super_admin' ? 'Profile & Settings' : 'Account Info'}
         </h2>
         <p className="text-xs text-luxury-gray mt-1 font-sans">
-          Configure check-in terminal options and view authorization metrics.
+          {profile?.role === 'super_admin' 
+            ? 'Configure check-in terminal options and view authorization metrics.' 
+            : 'View your staff profile detail and gate checkpoints.'}
         </p>
       </div>
 

@@ -21,6 +21,8 @@ import {
 } from 'lucide-react'
 import { format } from 'date-fns'
 
+const rolePrefix = { platinum: 'PLT', gold: 'GLD', silver: 'SLR', bronze: 'BRZ' }
+
 // Sound fallback synthesized directly
 const playBuzzer = () => {
   try {
@@ -242,10 +244,18 @@ const Dashboard = () => {
     if (e) e.preventDefault()
     
     // Normalize code (Remove whitespace and capitalize)
-    const rawCode = ticketInput.replace(/\s+/g, '').toUpperCase()
+    let rawCode = ticketInput.replace(/\s+/g, '').toUpperCase()
     if (!rawCode) {
       showToast.error('Please enter a ticket code.')
       return
+    }
+
+    // Auto-prepend role prefix for gate admins if it doesn't already start with it
+    if (profile?.role !== 'super_admin') {
+      const prefix = rolePrefix[profile?.role]
+      if (prefix && !rawCode.startsWith(prefix)) {
+        rawCode = prefix + rawCode
+      }
     }
 
     setVerifying(true)
@@ -398,9 +408,6 @@ const Dashboard = () => {
     )
   }
 
-  // Helper stats labels
-  const rolePrefix = { platinum: 'PLT', gold: 'GLD', silver: 'SLR', bronze: 'BRZ' }
-
   return (
     <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6">
       {/* Welcome Banner */}
@@ -486,15 +493,22 @@ const Dashboard = () => {
               Scan / Enter Ticket Code
             </label>
             <div className="flex gap-3">
-              <div className="relative flex-1">
+              <div className="relative flex-1 flex">
+                {profile?.role !== 'super_admin' && (
+                  <div className="bg-[#10284F] border-y border-l border-white/10 text-luxury-gold text-lg font-mono px-4.5 flex items-center rounded-l-lg select-none uppercase tracking-wider font-extrabold shadow-inner">
+                    {rolePrefix[profile?.role]}
+                  </div>
+                )}
                 <input
                   ref={inputRef}
                   type="text"
                   value={ticketInput}
                   onChange={(e) => setTicketInput(e.target.value)}
-                  placeholder={profile?.role === 'super_admin' ? 'e.g. GLD225, PLT005' : `e.g. ${rolePrefix[profile?.role]}102`}
+                  placeholder={profile?.role === 'super_admin' ? 'e.g. GLD225, PLT005' : 'e.g. 102'}
                   disabled={verifying}
-                  className="w-full px-5 py-4 text-xl font-mono tracking-[0.2em] uppercase text-white rounded-lg bg-luxury-bg border border-white/10 text-center focus:outline-none focus:border-luxury-gold transition-all duration-300 shadow-inner"
+                  className={`w-full px-5 py-4 text-xl font-mono tracking-[0.2em] uppercase text-white bg-luxury-bg border border-white/10 focus:outline-none focus:border-luxury-gold transition-all duration-300 shadow-inner ${
+                    profile?.role !== 'super_admin' ? 'rounded-r-lg border-l-0 text-left pl-6' : 'rounded-lg text-center'
+                  }`}
                   autoComplete="off"
                 />
               </div>

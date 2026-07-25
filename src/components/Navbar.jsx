@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useSound } from '../context/SoundContext'
-import { Menu, LogOut, Volume2, VolumeX, Shield, Clock } from 'lucide-react'
+import { Menu, LogOut, Volume2, VolumeX } from 'lucide-react'
 import { format } from 'date-fns'
 
 const Navbar = ({ onToggleSidebar }) => {
@@ -26,15 +26,15 @@ const Navbar = ({ onToggleSidebar }) => {
   }
 
   const roleColors = {
-    super_admin: 'border-luxury-gold text-luxury-gold bg-luxury-gold/5',
-    platinum: 'border-[#E5E4E2] text-white bg-[#E5E4E2]/5',
-    gold: 'border-[#FFD700] text-[#FFD700] bg-[#FFD700]/5',
-    silver: 'border-[#C0C0C0] text-[#C0C0C0] bg-[#C0C0C0]/5',
-    bronze: 'border-[#CD7F32] text-[#CD7F32] bg-[#CD7F32]/5',
+    super_admin: 'border-luxury-gold/30 text-luxury-gold bg-luxury-gold/5',
+    platinum: 'border-white/20 text-white/90 bg-white/5',
+    gold: 'border-[#FFD700]/25 text-[#FFD700] bg-[#FFD700]/5',
+    silver: 'border-[#C0C0C0]/25 text-[#C0C0C0] bg-[#C0C0C0]/5',
+    bronze: 'border-[#CD7F32]/25 text-[#CD7F32] bg-[#CD7F32]/5',
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel-heavy border-b border-luxury-gold/15 px-4 lg:px-8 py-3 flex items-center justify-between shadow-md">
+    <header className="sticky top-0 z-40 w-full bg-luxury-bg/95 border-b border-white/5 px-4 lg:px-8 py-2.5 flex items-center justify-between backdrop-blur-md shadow-lg">
       {/* Brand Section */}
       <div className="flex items-center space-x-3">
         <button
@@ -44,8 +44,8 @@ const Navbar = ({ onToggleSidebar }) => {
           <Menu className="w-5 h-5" />
         </button>
         <div className="flex items-center space-x-2.5">
-          {/* Decorative Temple-like Royal Icon */}
-          <div className="w-9 h-9 rounded-full border border-luxury-gold overflow-hidden bg-luxury-bg shadow-lg shadow-luxury-gold/10 flex items-center justify-center">
+          {/* Circular Temple branding Logo */}
+          <div className="w-8.5 h-8.5 rounded-full border border-luxury-gold/80 overflow-hidden bg-luxury-bg shadow-md shadow-luxury-gold/10 flex items-center justify-center">
             <img 
               src="/logo.jpg" 
               alt="Keshavam Logo" 
@@ -53,60 +53,65 @@ const Navbar = ({ onToggleSidebar }) => {
             />
           </div>
           <div>
-            <h1 className="text-sm lg:text-base font-serif font-extrabold tracking-[0.12em] text-white uppercase leading-none">
+            <h1 className="text-xs lg:text-sm font-serif font-black tracking-[0.15em] text-white uppercase leading-none">
               Keshavam
             </h1>
-            <p className="text-[10px] tracking-[0.25em] text-luxury-gold font-sans uppercase">
+            <p className="text-[9px] tracking-[0.25em] text-luxury-gold font-sans uppercase mt-0.5">
               Bhajan Clubbing
             </p>
           </div>
         </div>
       </div>
 
-      {/* Clock and Utility Controls */}
-      <div className="flex items-center space-x-4 lg:space-x-6">
-        {/* Real-time Clock */}
-        <div className="hidden md:flex items-center space-x-2 text-xs text-luxury-gray bg-luxury-bg/50 px-3.5 py-1.5 rounded border border-white/5 font-sans">
-          <Clock className="w-3.5 h-3.5 text-luxury-gold" />
+      {/* Clock and Unified Profile Capsule */}
+      <div className="flex items-center space-x-4">
+        {/* Real-time Clock Pill */}
+        <div className="hidden md:flex items-center space-x-2 text-[10px] text-luxury-gray bg-black/35 px-4 py-2 rounded-full border border-white/5 font-mono tracking-wider font-semibold shadow-inner">
+          <div className="w-1.5 h-1.5 rounded-full bg-luxury-success animate-pulse mr-0.5" />
           <span>{format(time, 'dd MMM yyyy, hh:mm:ss a')}</span>
         </div>
 
-        {/* Audio Toggle */}
+        {/* Audio Toggle Button */}
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
-          className={`p-2 rounded border transition-all focus:outline-none flex items-center justify-center ${
+          className={`p-2 rounded-full border transition-all duration-300 focus:outline-none flex items-center justify-center cursor-pointer ${
             soundEnabled 
-              ? 'border-luxury-gold/30 text-luxury-gold hover:bg-luxury-gold/5' 
-              : 'border-white/10 text-luxury-gray/50 hover:bg-white/5'
+              ? 'border-luxury-gold/25 text-luxury-gold bg-luxury-gold/5 hover:bg-luxury-gold/10' 
+              : 'border-white/10 text-luxury-gray/50 hover:bg-white/5 hover:text-white'
           }`}
           title={soundEnabled ? 'Mute Sounds' : 'Unmute Sounds'}
         >
-          {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
         </button>
 
-        {/* Admin Badge */}
-        <div className="hidden sm:flex items-center space-x-3">
-          <div className="text-right">
-            <h4 className="text-xs font-semibold text-luxury-white">
+        {/* Integrated User Profile Capsule */}
+        <div className="flex items-center space-x-3 bg-luxury-card border border-white/5 pl-2.5 pr-4 py-1.5 rounded-full shadow-lg">
+          {/* Avatar on the left */}
+          <div className="w-8 h-8 rounded-full border border-white/10 bg-luxury-bg flex items-center justify-center text-luxury-gold text-xs font-black shadow-inner uppercase flex-shrink-0">
+            {profile?.name ? profile.name.charAt(0) : 'A'}
+          </div>
+
+          {/* Text details in the middle */}
+          <div className="text-left hidden sm:block">
+            <h4 className="text-[11px] font-bold text-white tracking-wide leading-tight">
               {profile?.name || 'Admin'}
             </h4>
-            <span className={`inline-block mt-0.5 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border rounded-full ${roleColors[profile?.role] || 'border-white/10 text-luxury-gray'}`}>
+            <span className={`inline-block mt-0.5 text-[8px] font-black uppercase tracking-wider px-2 py-0.5 border rounded-full ${roleColors[profile?.role] || 'border-white/10 text-luxury-gray'}`}>
               {roleLabels[profile?.role] || 'Admin'}
             </span>
           </div>
-          <div className="w-8 h-8 rounded-full border border-white/10 bg-luxury-card flex items-center justify-center text-luxury-gold-light text-xs font-bold font-serif">
-            {profile?.name ? profile.name.charAt(0).toUpperCase() : 'A'}
-          </div>
-        </div>
 
-        {/* Logout Button */}
-        <button
-          onClick={logout}
-          className="p-2 border border-luxury-error/25 hover:border-luxury-error text-luxury-error hover:bg-luxury-error/5 rounded transition-all focus:outline-none flex items-center justify-center"
-          title="Sign Out"
-        >
-          <LogOut className="w-4 h-4" />
-        </button>
+          <div className="h-4 w-[1px] bg-white/10 mx-0.5" />
+
+          {/* Logout button on the right */}
+          <button
+            onClick={logout}
+            className="p-1 text-luxury-error/70 hover:text-luxury-error transition-colors focus:outline-none flex items-center justify-center cursor-pointer"
+            title="Sign Out"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </header>
   )
