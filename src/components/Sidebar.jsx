@@ -90,6 +90,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <NavLink
                   key={link.path}
                   to={link.path}
+                  end={link.path === '/dashboard'}
                   onClick={() => {
                     // Close sidebar on mobile select
                     if (window.innerWidth < 1024) onClose()
