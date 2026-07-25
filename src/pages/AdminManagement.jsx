@@ -226,7 +226,7 @@ const AdminManagement = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl space-y-6"
+            className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl space-y-6"
           >
             <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 flex items-center gap-2">
               <UserPlus className="w-4 h-4 text-luxury-gold" />
@@ -331,7 +331,7 @@ const AdminManagement = () => {
         {/* List Panel: Admins List */}
         <div className="lg:col-span-2 space-y-4">
           {/* Search Box */}
-          <div className="glass-panel p-4 rounded-xl border border-luxury-gold/15 flex items-center space-x-3.5">
+          <div className="bg-luxury-card p-4 rounded-xl border border-white/5 flex items-center space-x-3.5 shadow-xl">
             <Search className="w-5 h-5 text-luxury-gold" />
             <input
               type="text"
@@ -347,7 +347,7 @@ const AdminManagement = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="glass-panel rounded-xl border border-luxury-gold/15 overflow-hidden shadow-xl"
+            className="bg-luxury-card rounded-xl border border-white/5 overflow-hidden shadow-2xl"
           >
             <div className="px-6 py-4 border-b border-luxury-gold/15 flex justify-between items-center bg-luxury-bg/40">
               <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light flex items-center gap-2">

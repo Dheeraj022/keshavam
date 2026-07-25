@@ -96,20 +96,20 @@ const Sidebar = ({ isOpen, onClose }) => {
                     if (window.innerWidth < 1024) onClose()
                   }}
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-3 text-sm font-medium tracking-wide uppercase rounded-lg border transition-all duration-300 group ${
+                    `flex items-center px-6 py-4 text-xs font-semibold tracking-widest uppercase transition-all duration-300 border-l-4 group ${
                       isActive
-                        ? 'bg-luxury-gold text-luxury-bg border-luxury-gold shadow-lg shadow-luxury-gold/25 font-bold'
-                        : 'border-transparent text-luxury-gray hover:text-luxury-gold-light hover:bg-luxury-card/30 hover:border-luxury-gold/10'
+                        ? 'bg-luxury-gold/5 text-luxury-gold border-l-luxury-gold border-y-transparent border-r-transparent font-bold'
+                        : 'border-l-transparent border-y-transparent border-r-transparent text-luxury-gray hover:text-luxury-gold-light hover:bg-[#10284F]/20'
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
                       <Icon
-                        className={`mr-3 w-5 h-5 flex-shrink-0 transition-colors duration-300 ${
+                        className={`mr-3.5 w-4 h-4 flex-shrink-0 transition-colors duration-300 ${
                           isActive
-                            ? 'text-luxury-bg'
-                            : 'text-luxury-gold/60 group-hover:text-luxury-gold'
+                            ? 'text-luxury-gold'
+                            : 'text-luxury-gray group-hover:text-luxury-gold-light'
                         }`}
                       />
                       <span className="font-serif font-semibold text-xs tracking-widest">{link.name}</span>

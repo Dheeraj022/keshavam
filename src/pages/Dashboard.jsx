@@ -407,19 +407,20 @@ const Dashboard = () => {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="lg:col-span-3 order-1 glass-panel p-6 rounded-xl border-l-4 border-l-luxury-gold flex flex-col md:flex-row md:items-center justify-between gap-4"
+        className="lg:col-span-3 order-1 bg-gradient-to-r from-[#10284F] to-[#0B1F3F] p-6 rounded-xl border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-2xl relative"
       >
-        <div>
-          <h2 className="text-xl lg:text-2xl font-serif font-bold text-white flex items-center gap-2">
+        <div className="absolute top-0 left-0 bottom-0 w-1 bg-luxury-gold rounded-l-xl" />
+        <div className="pl-2">
+          <h2 className="text-xl lg:text-2xl font-serif font-extrabold text-white flex items-center gap-2 tracking-wide">
             WELCOME, <span className="gold-text-gradient uppercase">{profile?.name}</span>
           </h2>
-          <p className="text-xs text-luxury-gray tracking-wider mt-1 uppercase">
+          <p className="text-[10px] text-luxury-gray tracking-[0.2em] mt-1.5 uppercase font-semibold">
             Location: Moradabad | Session Status: Active & Secured
           </p>
         </div>
-        <div className="flex items-center space-x-2 text-xs text-luxury-gold-light/80 bg-luxury-bg-sec px-4 py-2 rounded-lg border border-luxury-gold/15">
+        <div className="flex items-center space-x-2 text-[10px] text-luxury-gold-light/90 bg-black/35 px-4 py-2 rounded-lg border border-luxury-gold/15 tracking-widest font-semibold uppercase">
           <Zap className="w-3.5 h-3.5 text-luxury-gold animate-pulse" />
-          <span className="font-serif uppercase tracking-widest font-semibold">
+          <span>
             {profile?.role === 'super_admin' ? 'SYSTEM SUPERVISOR' : `${profile?.role} Checkpoint`}
           </span>
         </div>
@@ -466,25 +467,25 @@ const Dashboard = () => {
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
-        className="lg:col-span-2 order-2 lg:order-3 glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl relative overflow-hidden"
+        className="lg:col-span-2 order-2 lg:order-3 bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl relative overflow-hidden"
       >
-        {/* Background luxury watermarks */}
-        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-12 translate-y-12">
+        {/* Background luxury watermark */}
+        <div className="absolute right-0 bottom-0 opacity-[0.02] pointer-events-none transform translate-x-12 translate-y-12">
           <Ticket className="w-64 h-64 text-luxury-gold" />
         </div>
 
-        <h3 className="text-lg font-serif font-bold text-luxury-white mb-6 uppercase tracking-wider border-b border-luxury-gold/10 pb-3 flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-luxury-gold mr-2.5 animate-ping"></span>
+        <h3 className="text-sm font-serif font-black text-luxury-white mb-6 uppercase tracking-widest border-b border-white/5 pb-3 flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold animate-ping"></span>
           Verification Console
         </h3>
 
         {/* Input Form */}
         <form onSubmit={handleVerify} className="space-y-4 relative z-10">
           <div className="space-y-2">
-            <label className="text-xs text-luxury-gray uppercase tracking-widest font-semibold block">
+            <label className="text-[10px] text-luxury-gray uppercase tracking-widest font-bold block">
               Scan / Enter Ticket Code
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <div className="relative flex-1">
                 <input
                   ref={inputRef}
@@ -493,14 +494,14 @@ const Dashboard = () => {
                   onChange={(e) => setTicketInput(e.target.value)}
                   placeholder={profile?.role === 'super_admin' ? 'e.g. GLD225, PLT005' : `e.g. ${rolePrefix[profile?.role]}102`}
                   disabled={verifying}
-                  className="w-full px-5 py-4 text-xl font-mono tracking-widest uppercase text-white rounded-lg glass-input text-center focus:border-luxury-gold"
+                  className="w-full px-5 py-4 text-xl font-mono tracking-[0.2em] uppercase text-white rounded-lg bg-luxury-bg border border-white/10 text-center focus:outline-none focus:border-luxury-gold transition-all duration-300 shadow-inner"
                   autoComplete="off"
                 />
               </div>
               <button
                 type="submit"
                 disabled={verifying}
-                className="px-6 py-4 bg-luxury-gold hover:bg-luxury-gold-light hover:shadow-lg text-luxury-bg font-serif font-bold uppercase tracking-wider text-sm rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                className="px-6 py-4 bg-luxury-gold hover:bg-luxury-gold-light text-luxury-bg font-serif font-bold uppercase tracking-widest text-xs rounded-lg transition-all duration-300 flex items-center justify-center space-x-2 border border-luxury-gold cursor-pointer"
               >
                 <span>Verify</span>
                 <ArrowRight className="w-4 h-4" />
@@ -514,34 +515,34 @@ const Dashboard = () => {
           {scanResult && (
             <motion.div
               key={scanResult.code + scanResult.success}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
+              exit={{ opacity: 0, y: -12 }}
               className={`mt-6 p-5 rounded-lg border text-center transition-all duration-300 ${
                 scanResult.success 
-                  ? 'border-luxury-success/30 bg-luxury-success/5 animate-glow-success' 
-                  : 'border-luxury-error/30 bg-luxury-error/5 animate-shake shadow-lg shadow-luxury-error/5'
+                  ? 'border-luxury-success/20 bg-luxury-success/5 shadow-inner' 
+                  : 'border-luxury-error/20 bg-luxury-error/5 shadow-inner animate-shake'
               }`}
             >
-              <div className="flex flex-col items-center space-y-2">
-                <div className="flex items-center space-x-2.5">
+              <div className="flex flex-col items-center space-y-2.5">
+                <div className="flex items-center space-x-2">
                   {scanResult.success ? (
-                    <Check className="w-6 h-6 text-luxury-success animate-bounce" />
+                    <Check className="w-5 h-5 text-luxury-success animate-bounce" />
                   ) : (
-                    <AlertTriangle className="w-6 h-6 text-luxury-error animate-pulse" />
+                    <AlertTriangle className="w-5 h-5 text-luxury-error animate-pulse" />
                   )}
-                  <h4 className={`text-lg font-serif font-black uppercase tracking-wider ${
+                  <h4 className={`text-base font-serif font-black uppercase tracking-wider ${
                     scanResult.success ? 'text-luxury-success' : 'text-luxury-error'
                   }`}>
                     {scanResult.message}
                   </h4>
                 </div>
 
-                <div className="py-2.5 px-6 rounded-md bg-black/40 border border-white/5 font-mono text-2xl font-black text-luxury-white tracking-widest shadow-inner">
+                <div className="py-2.5 px-6 rounded bg-black/40 border border-white/5 font-mono text-xl font-bold text-white tracking-widest shadow-inner">
                   {scanResult.code}
                 </div>
 
-                <p className="text-xs text-luxury-gray max-w-md font-sans">
+                <p className="text-[11px] text-luxury-gray max-w-md font-sans">
                   {scanResult.details}
                 </p>
               </div>
@@ -556,9 +557,9 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="lg:col-span-2 order-4 lg:order-4 glass-panel p-6 rounded-xl border border-luxury-gold/15"
+          className="lg:col-span-2 order-4 lg:order-4 bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl"
         >
-          <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light mb-4">
+          <h3 className="text-xs font-serif font-bold uppercase tracking-widest text-luxury-gold-light mb-4 pb-2 border-b border-white/5">
             Gate Wise Breakdown
           </h3>
           <div className="space-y-4">
@@ -593,20 +594,20 @@ const Dashboard = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4 }}
-        className="lg:col-span-1 order-5 lg:order-5 glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl flex flex-col h-[500px]"
+        className="lg:col-span-1 order-5 lg:order-5 bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl flex flex-col h-[500px]"
       >
-        <h3 className="text-sm font-serif font-bold text-luxury-white mb-4 uppercase tracking-widest flex items-center justify-between border-b border-luxury-gold/10 pb-3">
+        <h3 className="text-xs font-serif font-bold text-luxury-white mb-4 uppercase tracking-widest flex items-center justify-between border-b border-white/5 pb-3">
           <span className="flex items-center gap-2">
             <History className="w-4 h-4 text-luxury-gold" />
             Live Check-ins
           </span>
-          <span className="text-[10px] bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold font-sans">
+          <span className="text-[9px] bg-luxury-gold/15 border border-luxury-gold/25 text-luxury-gold px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold font-sans">
             Realtime
           </span>
         </h3>
 
         {/* List */}
-        <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
+        <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin">
           <AnimatePresence>
             {recentActivity.length === 0 ? (
               <div className="h-full flex items-center justify-center text-center p-4">
@@ -621,15 +622,15 @@ const Dashboard = () => {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="p-3 rounded bg-luxury-bg-sec/60 border border-luxury-gold/5 flex items-center justify-between gap-2 text-xs"
+                  className="p-3.5 rounded-lg bg-luxury-bg/50 border border-white/5 flex items-center justify-between gap-2 text-xs transition-colors hover:bg-luxury-bg/85"
                 >
                   <div className="flex items-center space-x-2.5">
-                    <div className="w-2 h-2 rounded-full bg-luxury-success" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-luxury-success shadow-sm" />
                     <div>
                       <p className="font-mono font-bold text-white tracking-widest">
                         {activity.code}
                       </p>
-                      <p className="text-[10px] text-luxury-gray">
+                      <p className="text-[10px] text-luxury-gray mt-0.5">
                         Verified by {activity.admin}
                       </p>
                     </div>

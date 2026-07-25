@@ -226,31 +226,31 @@ const Analytics = () => {
 
       {/* Mini Stats Summary Banner */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="glass-panel p-4 rounded-xl border border-luxury-gold/10 flex items-center space-x-3.5">
+        <div className="bg-luxury-card p-4 rounded-xl border border-white/5 flex items-center space-x-3.5 shadow-xl">
           <div className="p-2.5 rounded bg-luxury-success/10 text-luxury-success">
             <TicketCheck className="w-5 h-5" />
           </div>
           <div>
             <p className="text-[10px] text-luxury-gray uppercase tracking-wider font-semibold font-sans">Total Checked In</p>
-            <p className="text-xl font-bold font-serif text-white mt-0.5">{summary.totalCheckedIn} / 1800</p>
+            <p className="text-xl font-bold font-sans text-white mt-0.5">{summary.totalCheckedIn} / 1800</p>
           </div>
         </div>
-        <div className="glass-panel p-4 rounded-xl border border-luxury-gold/10 flex items-center space-x-3.5">
+        <div className="bg-luxury-card p-4 rounded-xl border border-white/5 flex items-center space-x-3.5 shadow-xl">
           <div className="p-2.5 rounded bg-luxury-gold/10 text-luxury-gold">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
             <p className="text-[10px] text-luxury-gray uppercase tracking-wider font-semibold font-sans">Arrival Rate</p>
-            <p className="text-xl font-bold font-serif text-white mt-0.5">{summary.efficiency}%</p>
+            <p className="text-xl font-bold font-sans text-white mt-0.5">{summary.efficiency}%</p>
           </div>
         </div>
-        <div className="glass-panel p-4 rounded-xl border border-luxury-gold/10 flex items-center space-x-3.5">
+        <div className="bg-luxury-card p-4 rounded-xl border border-white/5 flex items-center space-x-3.5 shadow-xl">
           <div className="p-2.5 rounded bg-luxury-error/10 text-luxury-error">
             <Calendar className="w-5 h-5" />
           </div>
           <div>
             <p className="text-[10px] text-luxury-gray uppercase tracking-wider font-semibold font-sans">Remaining Attendees</p>
-            <p className="text-xl font-bold font-serif text-white mt-0.5">{summary.totalRemaining}</p>
+            <p className="text-xl font-bold font-sans text-white mt-0.5">{summary.totalRemaining}</p>
           </div>
         </div>
       </div>
@@ -262,7 +262,7 @@ const Analytics = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl flex flex-col h-[380px]"
+          className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl flex flex-col h-[380px]"
         >
           <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 mb-4 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-luxury-gold" />
@@ -292,7 +292,7 @@ const Analytics = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl flex flex-col h-[380px]"
+          className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl flex flex-col h-[380px]"
         >
           <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 mb-4 flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-luxury-gold" />
@@ -317,7 +317,7 @@ const Analytics = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl flex flex-col h-[380px] lg:col-span-2"
+          className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl flex flex-col h-[380px] lg:col-span-2"
         >
           <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 mb-4 flex items-center gap-2">
             <PieIcon className="w-4 h-4 text-luxury-gold" />

@@ -5,23 +5,23 @@ const StatCard = ({ title, value, subtext, icon: Icon, color = 'gold', delay = 0
   const colorMap = {
     gold: {
       text: 'text-luxury-gold',
-      glow: 'shadow-luxury-gold/5 border-luxury-gold/20',
-      iconBg: 'bg-luxury-gold/10 text-luxury-gold',
+      border: 'border-luxury-gold/15',
+      iconColor: 'text-luxury-gold border-luxury-gold/20 bg-luxury-gold/5',
     },
     success: {
       text: 'text-luxury-success',
-      glow: 'shadow-luxury-success/5 border-luxury-success/20',
-      iconBg: 'bg-luxury-success/10 text-luxury-success',
+      border: 'border-luxury-success/20',
+      iconColor: 'text-luxury-success border-luxury-success/20 bg-luxury-success/5',
     },
     error: {
       text: 'text-luxury-error',
-      glow: 'shadow-luxury-error/5 border-luxury-error/20',
-      iconBg: 'bg-luxury-error/10 text-luxury-error',
+      border: 'border-luxury-error/20',
+      iconColor: 'text-luxury-error border-luxury-error/20 bg-luxury-error/5',
     },
     info: {
       text: 'text-luxury-gold-light',
-      glow: 'shadow-luxury-gold-light/5 border-luxury-gold-light/20',
-      iconBg: 'bg-luxury-gold-light/10 text-luxury-gold-light',
+      border: 'border-white/10',
+      iconColor: 'text-luxury-gold-light border-white/15 bg-white/5',
     },
   }
 
@@ -29,28 +29,28 @@ const StatCard = ({ title, value, subtext, icon: Icon, color = 'gold', delay = 0
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
-      whileHover={{ y: -4, scale: 1.01 }}
-      className={`glass-panel p-6 rounded-xl flex items-center justify-between shadow-lg border ${selectedColor.glow} transition-all duration-300`}
+      transition={{ duration: 0.4, delay, ease: 'easeOut' }}
+      whileHover={{ y: -3, borderColor: 'rgba(212, 175, 55, 0.3)' }}
+      className={`bg-luxury-card p-5 rounded-xl flex items-center justify-between border ${selectedColor.border} transition-all duration-300 shadow-xl`}
     >
-      <div className="space-y-2">
-        <p className="text-xs uppercase tracking-[0.2em] text-luxury-gray font-medium">
+      <div className="space-y-1">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-luxury-gray font-semibold">
           {title}
         </p>
-        <h3 className="text-3xl font-bold font-serif text-luxury-white">
+        <h3 className="text-2xl font-bold font-sans text-white tracking-tight">
           {value}
         </h3>
         {subtext && (
-          <p className="text-xs text-luxury-gray/70">
+          <p className="text-[10px] text-luxury-gray/60 font-sans tracking-wide">
             {subtext}
           </p>
         )}
       </div>
 
-      <div className={`p-3.5 rounded-lg ${selectedColor.iconBg} border border-white/5 shadow-inner`}>
-        {Icon && <Icon className="w-6 h-6" />}
+      <div className={`w-11 h-11 rounded-full border flex items-center justify-center shadow-inner ${selectedColor.iconColor}`}>
+        {Icon && <Icon className="w-5 h-5" />}
       </div>
     </motion.div>
   )

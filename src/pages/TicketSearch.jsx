@@ -337,7 +337,7 @@ const TicketSearch = () => {
       </div>
 
       {/* Filters Box */}
-      <div className="glass-panel p-5 rounded-xl border border-luxury-gold/15 shadow-xl grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-luxury-card p-5 rounded-xl border border-white/5 shadow-2xl grid grid-cols-1 md:grid-cols-3 gap-4">
         
         {/* Search */}
         <div className="space-y-1.5">
@@ -408,7 +408,7 @@ const TicketSearch = () => {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-panel rounded-xl border border-luxury-gold/15 overflow-hidden shadow-xl"
+        className="bg-luxury-card rounded-xl border border-white/5 overflow-hidden shadow-2xl"
       >
         {loading ? (
           <div className="p-16 flex justify-center">

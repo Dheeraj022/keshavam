@@ -42,7 +42,7 @@ const Settings = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl space-y-6 ${
+          className={`bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl space-y-6 ${
             profile?.role !== 'super_admin' ? 'md:col-span-2 max-w-2xl mx-auto w-full' : ''
           }`}
         >
@@ -93,7 +93,7 @@ const Settings = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="glass-panel p-6 rounded-xl border border-luxury-gold/15 shadow-xl space-y-6"
+            className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl space-y-6"
           >
             <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 flex items-center gap-2">
               <Volume2 className="w-4 h-4 text-luxury-gold" />
@@ -156,7 +156,7 @@ const Settings = () => {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
-        className="glass-panel p-6 rounded-xl border border-luxury-gold/10 shadow-lg space-y-4"
+        className="bg-luxury-card p-6 rounded-xl border border-white/5 shadow-2xl space-y-4"
       >
         <h3 className="text-sm font-serif font-bold uppercase tracking-widest text-luxury-gold-light border-b border-luxury-gold/10 pb-3 flex items-center gap-2">
           <HelpCircle className="w-4 h-4 text-luxury-gold" />
