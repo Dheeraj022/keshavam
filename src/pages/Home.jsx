@@ -209,7 +209,7 @@ const Home = () => {
             className="w-full flex-1 rounded-2xl overflow-hidden relative border border-luxury-gold/25 shadow-2xl flex items-end p-6 group"
           >
             <img 
-              src="/login-bg.jpg" 
+              src="/k.jpg" 
               alt="Divine Krishna background" 
               className="absolute inset-0 w-full h-full object-cover object-center transform scale-100 group-hover:scale-105 transition-transform duration-[6000ms] ease-out" 
             />

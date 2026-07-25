@@ -468,7 +468,7 @@ const Login = () => {
         <div className="hidden md:flex md:w-1/2 rounded-2xl overflow-hidden relative border border-luxury-gold/25 shadow-2xl shadow-luxury-gold/10 min-h-[500px]">
           {/* Lord Krishna Image background */}
           <img 
-            src="/login-bg.jpg" 
+            src="/k.jpg" 
             alt="Divine Lord Krishna" 
             className="absolute inset-0 w-full h-full object-cover object-center transform scale-100 hover:scale-105 transition-transform duration-[6000ms] ease-out"
           />
