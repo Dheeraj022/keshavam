@@ -1,103 +1,83 @@
-import React, { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, Clock, MapPin, Search, CheckCircle, XCircle, Sparkles, UserCheck } from 'lucide-react'
-import { supabase } from '../services/supabase'
-import { useAuth } from '../context/AuthContext'
-import { showToast } from '../components/Toast'
+import { motion } from 'framer-motion'
+import { Calendar, Clock, MapPin, Sparkles, UserCheck, Volume2, VolumeX } from 'lucide-react'
 
 const Home = () => {
-  const { isConfigured } = useAuth()
-  
-  // Public Ticket Status Checker States
-  const [ticketCode, setTicketCode] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [checkResult, setCheckResult] = useState(null)
+  // Krishna Theme Audio States
+  const [isPlaying, setIsPlaying] = useState(false)
+  const userPausedRef = useRef(false)
 
-  const handleCheckTicket = async (e) => {
-    e.preventDefault()
-    if (!ticketCode) return
+  useEffect(() => {
+    // Access or create global audio instance
+    if (!window.globalThemeAudio) {
+      window.globalThemeAudio = new Audio("/Krishna Theme _ Krish theme _ Flute cover By Lakhinandan Lahon.mp3")
+      window.globalThemeAudio.loop = true
+      window.globalThemeAudio.volume = 0.5 // pleasant volume
+    }
 
-    const formattedCode = ticketCode.trim().replace(/\s+/g, '').toUpperCase()
-    setLoading(true)
-    setCheckResult(null)
+    const audio = window.globalThemeAudio
 
-    try {
-      if (isConfigured) {
-        // Query ticket publicly
-        const { data, error } = await supabase
-          .from('tickets')
-          .select('ticket_code, category, checked_in')
-          .eq('ticket_code', formattedCode)
-          .single()
+    // Ensure it is paused and reset to 0:30 by default when entering page
+    audio.pause()
+    audio.currentTime = 30
 
-        if (error || !data) {
-          setCheckResult({
-            success: false,
-            message: 'Invalid Ticket Code',
-            details: 'This ticket code was not found in the official registry. Please check your card prefix (PLT, GLD, SLR, BRZ).'
-          })
-        } else {
-          setCheckResult({
-            success: true,
-            code: data.ticket_code,
-            category: data.category,
-            checkedIn: data.checked_in
-          })
+    const handleLoadedMetadata = () => {
+      audio.currentTime = 30
+    }
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+
+    const handleGlobalClick = () => {
+      // Play on first click anywhere if user hasn't explicitly paused it
+      if (audio.paused && !userPausedRef.current) {
+        if (audio.currentTime < 30) {
+          audio.currentTime = 30
         }
-      } else {
-        // Mock Sandbox Validation
-        const raw = localStorage.getItem('kbc_mock_tickets')
-        const tickets = raw ? JSON.parse(raw) : []
-        const match = tickets.find(t => t.ticket_code === formattedCode)
-
-        if (match) {
-          setCheckResult({
-            success: true,
-            code: match.ticket_code,
-            category: match.category,
-            checkedIn: match.checked_in
+        audio.play()
+          .then(() => {
+            setIsPlaying(true)
           })
-        } else {
-          // Check prefix structure to provide a friendly mock error
-          const prefix = formattedCode.substring(0, 3)
-          if (['PLT', 'GLD', 'SLR', 'BRZ'].includes(prefix)) {
-            setCheckResult({
-              success: true,
-              code: formattedCode,
-              category: prefix === 'PLT' ? 'platinum' : prefix === 'GLD' ? 'gold' : prefix === 'SLR' ? 'silver' : 'bronze',
-              checkedIn: false
-            })
-          } else {
-            setCheckResult({
-              success: false,
-              message: 'Invalid Ticket Code',
-              details: 'Mock Mode: Ticket code prefix must start with PLT, GLD, SLR, or BRZ followed by 3 digits (e.g. GLD125).'
-            })
-          }
-        }
+          .catch(err => {
+            console.warn("Autoplay was prevented or audio failed to load:", err)
+          })
       }
-    } catch (err) {
-      console.error(err)
-      showToast.error('Failed to query ticketing register.')
-    } finally {
-      setLoading(false)
+    }
+
+    // Add global click listener to page
+    document.addEventListener('click', handleGlobalClick)
+
+    return () => {
+      document.removeEventListener('click', handleGlobalClick)
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      // Note: We do not pause the audio here so it continues playing when shifting to other public pages like Login
+    }
+  }, [])
+
+  const togglePlay = (e) => {
+    e.stopPropagation() // prevent global click from triggering
+    const audio = window.globalThemeAudio
+    if (!audio) return
+
+    if (isPlaying) {
+      audio.pause()
+      userPausedRef.current = true
+      setIsPlaying(false)
+    } else {
+      userPausedRef.current = false
+      if (audio.currentTime < 30) {
+        audio.currentTime = 30
+      }
+      audio.play()
+        .then(() => {
+          setIsPlaying(true)
+        })
+        .catch(err => {
+          console.error("Playback failed:", err)
+        })
     }
   }
+  
 
-  const categoryLabels = {
-    platinum: 'Platinum Premium VIP Pass',
-    gold: 'Gold Gate Admission Pass',
-    silver: 'Silver Gate Standard Pass',
-    bronze: 'Bronze General Admission Pass',
-  }
-
-  const categoryColors = {
-    platinum: 'text-white border-white/20 bg-white/5',
-    gold: 'text-[#FFD700] border-[#FFD700]/25 bg-[#FFD700]/5',
-    silver: 'text-[#C0C0C0] border-[#C0C0C0]/25 bg-[#C0C0C0]/5',
-    bronze: 'text-[#CD7F32] border-[#CD7F32]/25 bg-[#CD7F32]/5',
-  }
 
   return (
     <div className="min-h-screen bg-luxury-bg text-white relative overflow-hidden flex flex-col font-sans">
@@ -241,6 +221,51 @@ const Home = () => {
         </p>
         <p className="text-white/20">Authorized ticket auditing console.</p>
       </footer>
+
+      {/* Floating Krishna Theme Music Controller */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex items-center gap-3 bg-luxury-bg-sec/90 backdrop-blur-md border border-luxury-gold/30 rounded-full pl-4 pr-3 py-2 text-xs shadow-lg shadow-black/50"
+        >
+          <div className="flex flex-col text-left pr-1">
+            <span className="font-serif text-[10px] uppercase tracking-wider text-luxury-gold font-bold">Divine Melody</span>
+            <span className="text-[9px] text-white/60 font-sans truncate max-w-[80px]">Krishna Flute</span>
+          </div>
+
+          {/* Sound waves visualization when playing */}
+          <div className="flex items-end gap-[2px] h-3.5 w-4 mb-0.5">
+            <motion.div 
+              animate={isPlaying ? { height: ["2px", "12px", "2px"] } : { height: "2px" }}
+              transition={{ repeat: Infinity, duration: 0.8, ease: "easeInOut" }}
+              className="w-[2px] bg-luxury-gold" 
+            />
+            <motion.div 
+              animate={isPlaying ? { height: ["2px", "16px", "2px"] } : { height: "2px" }}
+              transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.15 }}
+              className="w-[2px] bg-luxury-gold" 
+            />
+            <motion.div 
+              animate={isPlaying ? { height: ["2px", "10px", "2px"] } : { height: "2px" }}
+              transition={{ repeat: Infinity, duration: 0.7, ease: "easeInOut", delay: 0.3 }}
+              className="w-[2px] bg-luxury-gold" 
+            />
+          </div>
+
+          <button
+            onClick={togglePlay}
+            className="w-8 h-8 rounded-full bg-luxury-gold hover:bg-luxury-gold-light text-luxury-bg flex items-center justify-center transition-colors duration-300 focus:outline-none shadow-md shadow-luxury-gold/20 cursor-pointer"
+            aria-label={isPlaying ? "Mute Krishna Theme" : "Play Krishna Theme"}
+          >
+            {isPlaying ? (
+              <Volume2 className="w-4 h-4" />
+            ) : (
+              <VolumeX className="w-4 h-4" />
+            )}
+          </button>
+        </motion.div>
+      </div>
     </div>
   )
 }

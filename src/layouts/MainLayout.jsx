@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
@@ -8,6 +8,13 @@ import { AlertTriangle, Database } from 'lucide-react'
 const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { isConfigured } = useAuth()
+
+  // Ensure home page background music is stopped when entering main system dashboard layout
+  useEffect(() => {
+    if (window.globalThemeAudio) {
+      window.globalThemeAudio.pause()
+    }
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col bg-luxury-bg text-white">
