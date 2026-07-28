@@ -48,7 +48,7 @@ const Navbar = ({ onToggleSidebar }) => {
       </div>
 
       {/* Clock and Unified Profile Capsule */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-4">
         {/* Real-time Clock Pill */}
         <div className="hidden md:flex items-center space-x-2 text-[10px] text-luxury-gray bg-black/35 px-4 py-2 rounded-full border border-white/5 font-mono tracking-wider font-semibold shadow-inner">
           <div className="w-1.5 h-1.5 rounded-full bg-luxury-success animate-pulse mr-0.5" />
@@ -68,14 +68,14 @@ const Navbar = ({ onToggleSidebar }) => {
           {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
         </button>
 
-        {/* Integrated User Profile Capsule */}
-        <div className="flex items-center space-x-3 bg-luxury-card border border-white/5 pl-2.5 pr-4 py-1.5 rounded-full shadow-lg">
-          {/* Avatar on the left */}
+        {/* Integrated User Profile Capsule / Buttons */}
+        <div className="flex items-center space-x-2 sm:space-x-3 bg-transparent sm:bg-luxury-card border-0 sm:border border-white/5 p-0 sm:pl-2.5 sm:pr-4 sm:py-1.5 sm:rounded-full sm:shadow-lg">
+          {/* Avatar */}
           <div className="w-8 h-8 rounded-full border border-white/10 bg-luxury-bg flex items-center justify-center text-luxury-gold text-xs font-black shadow-inner uppercase flex-shrink-0">
             {profile?.name ? profile.name.charAt(0) : 'A'}
           </div>
 
-          {/* Text details in the middle */}
+          {/* Text details in the middle - Desktop Only */}
           <div className="text-left hidden sm:block">
             <h4 className="text-[11px] font-bold text-white tracking-wide leading-tight">
               {profile?.name || 'Admin'}
@@ -85,12 +85,13 @@ const Navbar = ({ onToggleSidebar }) => {
             </span>
           </div>
 
-          <div className="h-4 w-[1px] bg-white/10 mx-0.5" />
+          {/* Divider - Desktop Only */}
+          <div className="hidden sm:block h-4 w-[1px] bg-white/10 mx-0.5" />
 
-          {/* Logout button on the right */}
+          {/* Logout button */}
           <button
             onClick={logout}
-            className="p-1 text-luxury-error/70 hover:text-luxury-error transition-colors focus:outline-none flex items-center justify-center cursor-pointer"
+            className="w-8 h-8 sm:w-auto sm:h-auto rounded-full sm:rounded-none border sm:border-0 border-luxury-error/20 bg-luxury-error/5 sm:bg-transparent text-luxury-error/70 hover:text-luxury-error hover:bg-luxury-error/10 sm:hover:bg-transparent transition-all focus:outline-none flex items-center justify-center cursor-pointer flex-shrink-0"
             title="Sign Out"
           >
             <LogOut className="w-3.5 h-3.5" />
