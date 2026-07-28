@@ -5,6 +5,7 @@ import { supabase } from '../services/supabase'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, Lock, Database, User, ShieldCheck, KeyRound, ArrowLeft, LogIn } from 'lucide-react'
 import { showToast } from '../components/Toast'
+import BrandLogo from '../components/BrandLogo'
 
 const Login = () => {
   const { login, isConfigured } = useAuth()
@@ -178,22 +179,8 @@ const Login = () => {
           <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r from-luxury-gold/20 via-luxury-gold to-luxury-gold/20" />
 
           {/* Logo and Branding */}
-          <div className="flex items-center space-x-3 mb-8">
-            <div className="w-10 h-10 rounded-full border border-luxury-gold overflow-hidden bg-luxury-bg shadow-lg shadow-luxury-gold/15 flex items-center justify-center">
-              <img 
-                src="/logo.jpg" 
-                alt="Keshavam Logo" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h1 className="text-base font-serif font-black tracking-[0.15em] text-white uppercase leading-none">
-                Keshavam
-              </h1>
-              <p className="text-[10px] tracking-[0.2em] text-luxury-gold font-sans uppercase mt-0.5">
-                Bhajan Clubbing
-              </p>
-            </div>
+          <div className="mb-8">
+            <BrandLogo size="lg" />
           </div>
 
           {/* Header Title */}
@@ -487,7 +474,7 @@ const Login = () => {
               "Experience the Divine Bliss of Devotion and Music."
             </p>
             <p className="text-[10px] tracking-[0.3em] text-white/60 uppercase mt-3 font-sans font-bold">
-              Keshavam Bhajan Clubbing - Moradabad
+              Atakshi Event Management - Moradabad
             </p>
             <div className="w-16 h-[1px] bg-luxury-gold/40 mx-auto mt-4" />
           </motion.div>

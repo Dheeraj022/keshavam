@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import BrandLogo from './BrandLogo'
 import { useAuth } from '../context/AuthContext'
 import { useSound } from '../context/SoundContext'
 import { Menu, LogOut, Volume2, VolumeX } from 'lucide-react'
@@ -34,7 +35,7 @@ const Navbar = ({ onToggleSidebar }) => {
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-luxury-bg/95 border-b border-white/5 px-4 lg:px-8 py-2.5 flex items-center justify-between backdrop-blur-md shadow-lg">
+    <header className="sticky top-0 z-40 w-full bg-luxury-bg/95 border-b border-white/5 px-2.5 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between backdrop-blur-md shadow-lg gap-2">
       {/* Brand Section */}
       <div className="flex items-center space-x-3">
         <button
@@ -43,24 +44,7 @@ const Navbar = ({ onToggleSidebar }) => {
         >
           <Menu className="w-5 h-5" />
         </button>
-        <div className="flex items-center space-x-2.5">
-          {/* Circular Temple branding Logo */}
-          <div className="w-8.5 h-8.5 rounded-full border border-luxury-gold/80 overflow-hidden bg-luxury-bg shadow-md shadow-luxury-gold/10 flex items-center justify-center">
-            <img 
-              src="/logo.jpg" 
-              alt="Keshavam Logo" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h1 className="text-xs lg:text-sm font-serif font-black tracking-[0.15em] text-white uppercase leading-none">
-              Keshavam
-            </h1>
-            <p className="text-[9px] tracking-[0.25em] text-luxury-gold font-sans uppercase mt-0.5">
-              Bhajan Clubbing
-            </p>
-          </div>
-        </div>
+        <BrandLogo size="sm" />
       </div>
 
       {/* Clock and Unified Profile Capsule */}

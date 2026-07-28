@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Calendar, Clock, MapPin, Sparkles, UserCheck, Volume2, VolumeX } from 'lucide-react'
+import { Calendar, Clock, MapPin, Sparkles, UserCheck, Volume2, VolumeX, Menu, X } from 'lucide-react'
+import BrandLogo from '../components/BrandLogo'
 
 const Home = () => {
   // Krishna Theme Audio States
   const [isPlaying, setIsPlaying] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const userPausedRef = useRef(false)
 
   useEffect(() => {
@@ -102,28 +104,42 @@ const Home = () => {
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-luxury-gold/5 blur-3xl pointer-events-none" />
 
       {/* Top Header Navbar */}
-      <header className="w-full glass-panel border-b border-luxury-gold/15 px-6 lg:px-16 py-4 flex items-center justify-between relative z-20">
-        <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 rounded-full border border-luxury-gold overflow-hidden bg-luxury-bg shadow-lg shadow-luxury-gold/15 flex items-center justify-center">
-            <img src="/logo.jpg" alt="Atakshi Logo" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <h1 className="text-sm lg:text-base font-serif font-black tracking-[0.15em] text-white uppercase leading-none">
-              Atakshi
-            </h1>
-            <p className="text-[9px] tracking-[0.2em] text-luxury-gold font-sans uppercase mt-0.5">
-              Event Management
-            </p>
-          </div>
+      <header className="w-full glass-panel border-b border-luxury-gold/15 px-4 sm:px-6 lg:px-16 py-3 sm:py-4 flex items-center justify-between relative z-20 gap-2">
+        <BrandLogo size="md" />
+
+        {/* Desktop Navigation: Visible on sm and up */}
+        <div className="hidden sm:block">
+          <Link
+            to="/login"
+            className="px-4 py-2 border border-luxury-gold hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg font-serif font-bold uppercase tracking-widest text-[10px] rounded transition-all duration-300 flex items-center space-x-1.5 shadow-md shadow-luxury-gold/5"
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            <span>Staff Login</span>
+          </Link>
         </div>
 
-        <Link
-          to="/login"
-          className="px-4 py-2 border border-luxury-gold hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg font-serif font-bold uppercase tracking-widest text-[10px] rounded transition-all duration-300 flex items-center space-x-1.5 shadow-md shadow-luxury-gold/5"
+        {/* Mobile Navigation Toggle: Visible on mobile only */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="sm:hidden text-luxury-gold hover:text-luxury-gold-light focus:outline-none p-1.5 rounded-lg border border-luxury-gold/20 hover:bg-luxury-card/30 transition-colors"
+          aria-label="Toggle Menu"
         >
-          <UserCheck className="w-3.5 h-3.5" />
-          <span>Staff Login</span>
-        </Link>
+          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="absolute top-full left-0 right-0 glass-panel-heavy border-b border-luxury-gold/15 px-6 py-4 flex flex-col items-center space-y-3 sm:hidden shadow-xl z-30">
+            <Link
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              className="w-full py-2.5 border border-luxury-gold hover:bg-luxury-gold text-luxury-gold hover:text-luxury-bg font-serif font-bold uppercase tracking-widest text-[10px] rounded transition-all duration-300 flex items-center justify-center space-x-1.5 shadow-md shadow-luxury-gold/5"
+            >
+              <UserCheck className="w-4 h-4" />
+              <span>Staff Login</span>
+            </Link>
+          </div>
+        )}
       </header>
 
       {/* Main Page Layout Content */}
