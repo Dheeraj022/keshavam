@@ -55,7 +55,7 @@ const BrandLogo = ({ size = 'sm' }) => {
         <div className={`relative rounded-full border overflow-hidden bg-luxury-bg flex items-center justify-center flex-shrink-0 ${logoWrapperClasses[size]}`}>
           <img 
             src="/logonew.png" 
-            alt="Shristi Logo" 
+            alt="Shrishti Logo" 
             className="w-full h-full object-cover"
           />
         </div>
@@ -64,7 +64,7 @@ const BrandLogo = ({ size = 'sm' }) => {
       {/* Brand Text */}
       <div className="flex flex-col justify-center">
         <h1 className={`font-serif font-black text-white uppercase flex items-center whitespace-nowrap leading-none ${titleClasses[size]}`}>
-          Atakshi <span className="text-luxury-gold mx-0.5 sm:mx-1">x</span> Shristi
+          Atakshi <span className="text-luxury-gold mx-0.5 sm:mx-1">x</span> Shrishti
         </h1>
         <p className={`text-luxury-gold font-sans uppercase tracking-[0.25em] leading-none ${subtitleClasses[size]}`}>
           Event Management

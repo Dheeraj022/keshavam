@@ -155,7 +155,7 @@ const Home = () => {
           >
             <div className="inline-flex items-center space-x-2 px-3 py-1 bg-luxury-gold/10 border border-luxury-gold/25 rounded-full text-[10px] text-luxury-gold uppercase tracking-[0.2em] font-semibold animate-pulse">
               <Sparkles className="w-3 h-3" />
-              <span>Atakshi Presents</span>
+              <span>Atakshi X Shrishti Presents</span>
             </div>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black tracking-wide leading-tight text-white uppercase">
