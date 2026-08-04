@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { 
-  LayoutDashboard, 
-  Users, 
-  BarChart3, 
-  Search, 
-  Settings, 
-  MapPin, 
+import {
+  LayoutDashboard,
+  Users,
+  BarChart3,
+  Search,
+  Settings,
+  MapPin,
   X,
   Compass
 } from 'lucide-react'
@@ -70,9 +70,8 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 lg:w-72 glass-panel-heavy border-r border-luxury-gold/15 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:sticky lg:top-[65px] lg:h-[calc(100vh-65px)]`}
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 lg:w-72 glass-panel-heavy border-r border-luxury-gold/15 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          } lg:sticky lg:top-[65px] lg:h-[calc(100vh-65px)]`}
       >
         {/* Top Section */}
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
@@ -103,21 +102,19 @@ const Sidebar = ({ isOpen, onClose }) => {
                     if (window.innerWidth < 1024) onClose()
                   }}
                   className={({ isActive }) =>
-                    `flex items-center px-6 py-4 text-xs font-semibold tracking-widest uppercase transition-all duration-300 border-l-4 group ${
-                      isActive
-                        ? 'bg-luxury-gold/5 text-luxury-gold border-l-luxury-gold border-y-transparent border-r-transparent font-bold'
-                        : 'border-l-transparent border-y-transparent border-r-transparent text-luxury-gray hover:text-luxury-gold-light hover:bg-[#10284F]/20'
+                    `flex items-center px-6 py-4 text-xs font-semibold tracking-widest uppercase transition-all duration-300 border-l-4 group ${isActive
+                      ? 'bg-luxury-gold/5 text-luxury-gold border-l-luxury-gold border-y-transparent border-r-transparent font-bold'
+                      : 'border-l-transparent border-y-transparent border-r-transparent text-luxury-gray hover:text-luxury-gold-light hover:bg-[#10284F]/20'
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
                       <Icon
-                        className={`mr-3.5 w-4 h-4 flex-shrink-0 transition-colors duration-300 ${
-                          isActive
+                        className={`mr-3.5 w-4 h-4 flex-shrink-0 transition-colors duration-300 ${isActive
                             ? 'text-luxury-gold'
                             : 'text-luxury-gray group-hover:text-luxury-gold-light'
-                        }`}
+                          }`}
                       />
                       <span className="font-serif font-semibold text-xs tracking-widest">{link.name}</span>
                     </>
@@ -134,7 +131,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             <div className="flex items-center space-x-2 text-luxury-gold-light">
               <Compass className="w-4 h-4 animate-spin-slow" style={{ animationDuration: '8s' }} />
               <span className="font-serif font-bold text-[10px] tracking-widest uppercase">
-                Veneu Details
+                Venue Details
               </span>
             </div>
             <div className="space-y-1">

@@ -202,8 +202,8 @@ const Home = () => {
               <div>
                 <h4 className="text-xs uppercase tracking-wider text-luxury-gold font-bold font-serif">Venue Location</h4>
                 <p className="text-xs text-white font-semibold mt-1 leading-relaxed">
-                  Gandhi Maidan, Buddhi Vihar, Sector 7E, <br />
-                  Near Saint Mary’s School, Moradabad
+                  Keshvam Maidan Sector - 10 Buddhi Vihar Phase 2, <br />
+                  Infront of MGR Restaurant, Near Holy Chowk.
                 </p>
               </div>
             </div>
